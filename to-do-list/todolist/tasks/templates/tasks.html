@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> TO-DO-LIST </title>
+</head>
+<body>
+ <h1> Tasks: </h1>
+
+ <form method="POST" action="/">
+
+     {% csrf_token %}
+
+     {{TaskForm.title}}
+
+     <input class="btn" type="submit" name="Create Task">
+
+ </form>
+
+ {% for task in tasks %}
+
+    <p> - {{task.title}} </p>
+
+    <a href="{% url 'edit_task' task.id %}"> Edit </a>
+
+ <!--
+    <p> is completed? : {{task.completed}} </p>
+
+    <p> {{task.created}} </p>
+ -->
+
+ {% endfor %}
+
+</body>
+</html>
