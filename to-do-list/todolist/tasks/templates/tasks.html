@@ -19,7 +19,7 @@
 
  {% for task in tasks %}
 
-    <p>  * {{task}}  - [Pending? - {{task.completed}}] </p>
+    <p>  * {{task}}  - [Completed: {% if task.completed == True %}YES{% else %}NO{% endif %}] </p>
     <a href="{% url 'edit_task' task.id %}"> Edit </a>
     <br>
     <a href="{% url 'delete_task' task.id %}"> Delete </a>
