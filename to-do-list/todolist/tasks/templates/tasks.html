@@ -19,13 +19,12 @@
 
  {% for task in tasks %}
 
-    <p> - {{task.title}} </p>
-
+    <p>  * {{task}}  - [Pending? - {{task.completed}}] </p>
     <a href="{% url 'edit_task' task.id %}"> Edit </a>
-
+    <br>
+    <a href="{% url 'delete_task' task.id %}"> Delete </a>
  <!--
     <p> is completed? : {{task.completed}} </p>
-
     <p> {{task.created}} </p>
  -->
 

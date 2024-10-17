@@ -7,14 +7,10 @@
 <body>
  <h1> Edit Task: </h1>
 
- <form method="POST" action="/">
-
+ <form method="POST" action="">
      {% csrf_token %}
-
      {{TaskForm}}
-
      <input class="btn" type="submit" name="Edit Task">
-
  </form>
 
 </body>
