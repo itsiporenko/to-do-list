@@ -21,7 +21,7 @@
             {% endfor %}
         </ul>
         <p>
-            <input value="Add a new item" type="button" onclick="location.href='{% url "item-add" todo_list.id %}'" />
+            <input value="Add a new item" type="button" onclick="location.href='{% url 'item-add' todo_list.id %}'" />
             <input value="Delete this list" type="button"
                 onclick="location.href='{% url "list-delete" todo_list.id %}'" />
         </p>

@@ -56,7 +56,7 @@ class ItemCreate(CreateView):
         context = super().get_context_data()
         todo_list = ToDoList.objects.get(id=self.kwargs["list_id"])
         context["todo_list"] = todo_list
-        context["title"] = "Create a new item"
+        context["title"] = "Create a new task"
         return context
 
     def get_success_url(self):
@@ -84,8 +84,6 @@ class ItemUpdate(UpdateView):
 
 class ListDelete(DeleteView):
     model = ToDoList
-    # You have to use reverse_lazy() instead of reverse(),
-    # as the urls are not loaded when the file is imported.
     success_url = reverse_lazy("index")
 
 
