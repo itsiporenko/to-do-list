@@ -97,3 +97,20 @@ class ItemDelete(DeleteView):
         context = super().get_context_data(**kwargs)
         context["todo_list"] = self.object.todo_list
         return context
+
+# class RegisterPage(FormView):
+#     template_name = 'todo_app/register.html'
+#     form_class = UserCreationForm
+#     redirect_authenticated_user = True
+#     success_url = reverse_lazy('todo_list')
+#
+#     def form_valid(self, form):
+#         user = form.save()
+#         if user is not None:
+#             login(self.request, user)
+#         return super(RegisterPage, self).form_valid(form)
+#
+#     def get(self, *args, **kwargs):
+#         if self.request.user.is_authenticated:
+#             return redirect('todo_list')
+#         return super(RegisterPage, self).get(*args, *kwargs)
