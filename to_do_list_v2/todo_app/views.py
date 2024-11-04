@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse, reverse_lazy
 from django.views.generic import (
     CreateView,
@@ -8,11 +9,17 @@ from django.views.generic import (
 
 from .models import ToDoItem, ToDoList
 
-
-class ListListView(ListView):
+class ListListView(LoginRequiredMixin, ListView):
     model = ToDoList
     template_name = "todo_app/index.html"
 
+    def get_queryset(self):
+        return ToDoList.objects.filter(user=self.request.user)
+
+    def get_context_data(self):
+        context = super().get_context_data()
+        context["user"] = ToDoList.objects.get(user=self.request.user)
+        return context
 
 class ItemListView(ListView):
     model = ToDoItem
@@ -29,7 +36,10 @@ class ItemListView(ListView):
 
 class ListCreate(CreateView):
     model = ToDoList
-    fields = ["title"]
+    fields = [
+        "user",
+        "title",
+    ]
 
     def get_context_data(self):
         context = super().get_context_data()
@@ -44,6 +54,7 @@ class ItemCreate(CreateView):
         "title",
         "description",
         "due_date",
+        "completed",
     ]
 
     def get_initial(self):
@@ -70,6 +81,7 @@ class ItemUpdate(UpdateView):
         "title",
         "description",
         "due_date",
+        "completed",
     ]
 
     def get_context_data(self):
@@ -97,20 +109,3 @@ class ItemDelete(DeleteView):
         context = super().get_context_data(**kwargs)
         context["todo_list"] = self.object.todo_list
         return context
-
-# class RegisterPage(FormView):
-#     template_name = 'todo_app/register.html'
-#     form_class = UserCreationForm
-#     redirect_authenticated_user = True
-#     success_url = reverse_lazy('todo_list')
-#
-#     def form_valid(self, form):
-#         user = form.save()
-#         if user is not None:
-#             login(self.request, user)
-#         return super(RegisterPage, self).form_valid(form)
-#
-#     def get(self, *args, **kwargs):
-#         if self.request.user.is_authenticated:
-#             return redirect('todo_list')
-#         return super(RegisterPage, self).get(*args, *kwargs)
