@@ -18,7 +18,7 @@ class ListListView(LoginRequiredMixin, ListView):
 
     def get_context_data(self):
         context = super().get_context_data()
-        context["user"] = ToDoList.objects.get(user=self.request.user)
+        # context["user"] = ToDoList.objects.get(user=self.request.user)
         return context
 
 class ItemListView(ListView):
@@ -71,7 +71,7 @@ class ItemCreate(CreateView):
         return context
 
     def get_success_url(self):
-        return reverse("list", args=[self.object.todo_list_id])
+        return reverse("todo_app:list", args=[self.object.todo_list_id])
 
 
 class ItemUpdate(UpdateView):
@@ -91,7 +91,7 @@ class ItemUpdate(UpdateView):
         return context
 
     def get_success_url(self):
-        return reverse("list", args=[self.object.todo_list_id])
+        return reverse("todo_app:list", args=[self.object.todo_list_id])
 
 
 class ListDelete(DeleteView):
@@ -103,7 +103,7 @@ class ItemDelete(DeleteView):
     model = ToDoItem
 
     def get_success_url(self):
-        return reverse_lazy("list", args=[self.kwargs["list_id"]])
+        return reverse_lazy("todo_app:list", args=[self.kwargs["list_id"]])
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

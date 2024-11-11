@@ -1,17 +1,31 @@
 {% extends "base.html" %}
 
 {% block content %}
-<p>To-Do List helps you keep track of your planning to-do, for any topic you're
- creating plans.</p>
+{% if request.user.is_authenticated %}
+<a href="{% url 'user_app:logout' %}">Logout</a>
+{% else %}
+<a href="{% url 'user_app:login' %}">Login</a>
+{% endif %}
+
+<div class="header-bar">
+    <div>
+        <h2>Hello, {{ user.username|default:'Guest' }}!</h2>
+        <!--<h2>Hello {{ request.user|title }}</h2>-->
+        <!--<h2>You have <i>{{ count }} incomplete task{{ count|pluralize:'s' }}</i></h2>-->
+
+    </div>
+</div>
+
 <!--index.html-->
+
 {% if object_list %}
-<h3>All my lists</h3>
+<h3> {{ user.username|default:'Guest' }}'s lists</h3>
 {% endif %}
 <ul>
     {% for todolist in object_list %}
     <li>
         <div role="button"
-            onclick="location.href='{% url 'list' todolist.id %}'">
+            onclick="location.href='{% url 'todo_app:list' todolist.id %}'">
             {{ todolist.title }}
         </div>
     </li>
@@ -21,7 +35,8 @@
 </ul>
 <p>
     <input value="Add a new list" type="button"
-        onclick="location.href='{% url 'list-add' %}'"/>
+        onclick="location.href='{% url 'todo_app:list-add' %}'"/>
 </p>
+
 
 {% endblock %}

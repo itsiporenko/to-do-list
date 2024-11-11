@@ -7,14 +7,13 @@ from django.contrib.auth.decorators import login_required
 def one_week_hence():
     return timezone.now() + timezone.timedelta(days=7)
 
-#@login_required
+
 class ToDoList(models.Model):
     title = models.CharField(max_length=100, unique=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=False, blank=False)
 
     def get_absolute_url(self):
-        return reverse("list", args=[str(self.user.id), self.id])
+        return reverse("todo_app:list", args=[self.id])
 
     def __str__(self):
         return self.title
@@ -29,7 +28,7 @@ class ToDoItem(models.Model):
 
     def get_absolute_url(self):
         return reverse(
-            "item-update", args=[str(self.todo_list.id), str(self.id)]
+            "todo_app:item-update", args=[self.todo_list.id, self.id]
         )
 
     def __str__(self):

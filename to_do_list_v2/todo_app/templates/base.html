@@ -12,7 +12,10 @@
 
 <body>
     <div>
-        <h1 onclick="location.href='{% url 'index' %}'">Django To-do Lists</h1>
+        <h1 onclick="location.href='{% url 'todo_app:index' %}'">Django To-do Lists</h1>
+
+        <p>To-Do List helps you keep track of your planning to-do,
+            for any topic you're creating plans.</p>
     </div>
     <div>
         {% block content %}
