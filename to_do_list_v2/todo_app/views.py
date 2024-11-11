@@ -41,9 +41,14 @@ class ListCreate(CreateView):
         "title",
     ]
 
+    def get_initial(self):
+        initial_data = super().get_initial()
+        initial_data["user"] = self.request.user
+        return initial_data
+
     def get_context_data(self):
         context = super().get_context_data()
-        context["title"] = "Add a new list"
+        context["title"] = "Add a new list for " + str(self.request.user)
         return context
 
 
@@ -87,7 +92,7 @@ class ItemUpdate(UpdateView):
     def get_context_data(self):
         context = super().get_context_data()
         context["todo_list"] = self.object.todo_list
-        context["title"] = "Edit item"
+        context["title"] = "Edit item " + str(self.object.todo_list.user)
         return context
 
     def get_success_url(self):
@@ -96,7 +101,7 @@ class ItemUpdate(UpdateView):
 
 class ListDelete(DeleteView):
     model = ToDoList
-    success_url = reverse_lazy("index")
+    success_url = reverse_lazy("todo_app:index")
 
 
 class ItemDelete(DeleteView):

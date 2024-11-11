@@ -5,8 +5,6 @@ from todo_app import views
 app_name = "todo_app"
 
 urlpatterns = [
-    #Home page
-    # path("", views.ListListView.as_view(), name="base"),
 
     path("", views.ListListView.as_view(), name="index"),
 
