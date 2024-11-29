@@ -2,16 +2,19 @@
 
 {% block content %}
 
+<div class="header-bar">
+    <h3>Delete To-do Item</h3>
+</div>
 
-<h3>Delete To-do Item</h3>
-
-<p>Are you sure you want to delete the item: <b>{{ object.title }}</b>
+<div class="card-body">
+    <p>Are you sure you want to delete the item: <b>{{ object.title }}</b>
     <p>from the list <i>{{ todo_list.title }}</i>?</p>
 
     <form method="POST">
         {% csrf_token %}
-        <input value="Yes,delete." type="submit">
-        <input value="Cancel" type="button" onclick="location.href='{% url 'todo_app:list' todo_list.id %}';" />
+        <input class="button" value="Yes,delete." type="submit">
+        <input class="button" value="Cancel" type="button"
+               onclick="location.href='{% url 'todo_app:list' todo_list.id %}';"/>
     </form>
-
-    {% endblock %}
+</div>
+{% endblock %}

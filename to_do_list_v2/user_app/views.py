@@ -3,7 +3,7 @@ from django.shortcuts import redirect
 from django.views.generic.edit import FormView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
-#from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.contrib.auth import logout
 from django.contrib.auth.views import LogoutView
@@ -26,7 +26,7 @@ class RegisterPage(FormView):
     template_name = 'register.html'
     form_class = UserCreationForm
     redirect_authenticated_user = True
-    success_url = reverse_lazy('register')
+    success_url = reverse_lazy('user_app:register')
 
     def form_valid(self, form):
         user = form.save()

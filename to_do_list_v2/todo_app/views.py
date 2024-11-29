@@ -49,6 +49,7 @@ class ListCreate(CreateView):
     def get_context_data(self):
         context = super().get_context_data()
         context["title"] = "Add a new list for " + str(self.request.user)
+        context["user"] = self.request.user
         return context
 
 

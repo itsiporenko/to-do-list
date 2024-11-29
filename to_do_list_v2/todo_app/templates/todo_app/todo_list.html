@@ -1,30 +1,34 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div>
+
+<div class="header-bar">
     <div>
-        <div>
-            <h3>Edit list:</h3>
-            <h5>{{ todo_list.title|upper}}</h5>
-        </div>
-        <ul>
-            {% for todo in object_list %}
-            <li>
-                <div>
-                    <div role="button" onclick="location.href='{% url "todo_app:item-update" todo_list.id todo.id %}'">
-                        {{ todo.title }}
-                        (Due {{ todo.due_date| date:"l, F j" }})
-                    </div>
-            </li>
-            {% empty %}
-            <p>There are no to-do items in this list.</p>
-            {% endfor %}
-        </ul>
-        <p>
-            <input value="Add a new item" type="button" onclick="location.href='{% url 'todo_app:item-add' todo_list.id %}'" />
-            <input value="Delete this list" type="button"
-                onclick="location.href='{% url "todo_app:list-delete" todo_list.id %}'" />
-        </p>
+        <h3>Edit list:</h3>
+        <h4>{{ todo_list.title|upper}}</h4>
     </div>
 </div>
+
+<div class="card-body">
+    <ul>
+        {% for todo in object_list %}
+        <li>
+            <div>
+                <div role="button" onclick="location.href='{% url 'todo_app:item-update' todo_list.id todo.id %}'">
+                    {{ todo.title }}
+                    (Due {{ todo.due_date| date:"l, F j" }})
+                </div>
+        </li>
+        {% empty %}
+        <p>There are no to-do items in this list.</p>
+        {% endfor %}
+    </ul>
+    <p>
+        <input class="button" value="Add a new item" type="button"
+               onclick="location.href='{% url 'todo_app:item-add' todo_list.id %}'"/>
+        <input class="button" value="Delete this list" type="button"
+               onclick="location.href='{% url 'todo_app:list-delete' todo_list.id %}'"/>
+    </p>
+</div>
+
 {% endblock %}

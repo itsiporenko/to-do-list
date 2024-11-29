@@ -1,3 +1,5 @@
+{% load crispy_forms_tags %}
+
 <!doctype html>
 <html lang="en">
 
@@ -6,22 +8,104 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--Simple.css-->
-    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+    <!--link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css"-->
+    <!--link rel="stylesheet" href="static/css/todo_index.css"-->
+    <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/solar/bootstrap.min.css">
     <title>Django To-do Lists Apps</title>
 </head>
 
+<style>
+    body{
+            background: linear-gradient(90deg, #ff00bf9b 0%, #c6ff6932 43%, #0099ff9d 100%);
+            font-family: 'Nunito', sans-serif;
+            padding-top: 50px;
+
+    }
+    .container {
+            max-width: 550px;
+            margin: auto;
+            background-color: #fff;
+            -webkit-box-shadow: 2px 2px 13px -4px rgba(0, 0, 0, 0.21);
+            box-shadow: 2px 2px 13px -4px rgba(0, 0, 0, 0.21);
+        }
+    .header-bar {
+        display: flex;
+        color: #fff;
+        padding: 10px;
+        border-radius: 5px 5px 0 0;
+        background: linear-gradient(90deg, #008cff 0%, #d469ff 43%, #ff00bf 100%);
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6
+    {
+    font-family: 'Raleway', sans-serif;
+    }
+     .delete-link {
+            text-decoration: none;
+            font-weight: 900;
+            color: #6249cf;
+            font-size: 22px;
+            line-height: 0;
+            padding: 20px 20px;
+        }
+        .header-bar a {
+            color: rgb(47, 247, 247);
+            text-decoration: none;
+        }
+        input[type=text],
+        input[type=password],
+        textarea {
+            border: 1px solid #757575;
+            border-radius: 5px;
+            padding: 10px;
+            width: 50%;
+        }
+
+        label {
+            padding-top: 10px !important;
+            display: block;
+        }
+
+        ::placeholder {
+            font-weight: 300;
+            opacity: 0.5;
+        }
+
+        .button {
+            border: 1px solid #757575;
+            background-color: #FFF;
+            color: #6249cf;
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .card-body {
+            padding: 20px;
+
+        }
+</style>
+
+
 <body>
+<div class="container_h" style="text-align: center">
     <div>
         <h1 onclick="location.href='{% url 'todo_app:index' %}'">Django To-do Lists</h1>
 
         <p>To-Do List helps you keep track of your planning to-do,
             for any topic you're creating plans.</p>
     </div>
-    <div>
-        {% block content %}
-        This content will be replaced by different html code for each page.
-        {% endblock %}
-    </div>
+</div>
+
+<div class="container">
+    {% block content %}
+    This content will be replaced by different html code for each page.
+    {% endblock %}
+</div>
 </body>
 
 </html>

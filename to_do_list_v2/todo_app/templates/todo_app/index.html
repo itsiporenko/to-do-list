@@ -18,6 +18,7 @@
 
 <!--index.html-->
 
+<div class="card-body">
 {% if object_list %}
 <h3> {{ user.username|default:'Guest' }}'s lists</h3>
 {% endif %}
@@ -34,9 +35,9 @@
     {% endfor %}
 </ul>
 <p>
-    <input value="Add a new list" type="button"
+    <input class="button" value="Add a new list" type="button"
         onclick="location.href='{% url 'todo_app:list-add' %}'"/>
 </p>
-
+</div>
 
 {% endblock %}
